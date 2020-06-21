@@ -1,5 +1,5 @@
 import { splitOpen } from '../state/actions';
-import { ExploreMode, Field, LinkModel, locationUtil, TimeRange } from '@grafana/data';
+import { Field, LinkModel, locationUtil, TimeRange } from '@grafana/data';
 import { getLinksFromLogsField } from '../../panel/panellinks/linkSuppliers';
 import { serializeStateToUrlParam } from '../../../core/utils/explore';
 import { getDataSourceSrv } from '@grafana/runtime';
@@ -78,9 +78,6 @@ function generateInternalHref(datasourceUid: string, query: string, range: TimeR
       // Again hardcoded for Jaeger query structure
       // TODO: fix
       queries: [{ query }],
-      // This should get overwritten if datasource does not support that mode and we do not know what mode is
-      // preferred anyway.
-      mode: ExploreMode.Metrics,
       ui: {
         showingGraph: true,
         showingTable: true,

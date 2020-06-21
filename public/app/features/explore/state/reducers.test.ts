@@ -21,7 +21,6 @@ import {
 import { ExploreId, ExploreItemState, ExploreState, ExploreUrlState } from 'app/types/explore';
 import { reducerTester } from 'test/core/redux/reducerTester';
 import {
-  changeModeAction,
   changeRangeAction,
   changeRefreshIntervalAction,
   scanStartAction,
@@ -74,21 +73,6 @@ describe('Explore item reducer', () => {
   });
 
   describe('changing datasource', () => {
-    describe('when changeMode is dispatched', () => {
-      it('then it should set correct state', () => {
-        reducerTester<ExploreItemState>()
-          .givenReducer(itemReducer, ({} as unknown) as ExploreItemState)
-          .whenActionIsDispatched(changeModeAction({ exploreId: ExploreId.left, mode: ExploreMode.Logs }))
-          .thenStatePredicateShouldEqual((resultingState: ExploreItemState) => {
-            expect(resultingState.mode).toEqual(ExploreMode.Logs);
-            expect(resultingState.logsResult).toBeNull();
-            expect(resultingState.graphResult).toBeNull();
-            expect(resultingState.tableResult).toBeNull();
-            return true;
-          });
-      });
-    });
-
     describe('when updateDatasourceInstanceAction is dispatched', () => {
       describe('and datasourceInstance supports graph, logs, table and has a startpage', () => {
         it('then it should set correct state', () => {
@@ -315,7 +299,6 @@ export const setup = (urlStateOverrides?: any) => {
       from: '',
       to: '',
     },
-    mode: ExploreMode.Metrics,
     ui: {
       dedupStrategy: LogsDedupStrategy.none,
       showingGraph: false,
