@@ -190,6 +190,7 @@ export interface ExploreItemState {
   showLogs?: boolean;
   showMetrics?: boolean;
   showTable?: boolean;
+  showTrace?: boolean;
 }
 
 export interface ExploreUpdateState {
